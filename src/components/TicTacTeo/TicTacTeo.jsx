@@ -100,12 +100,29 @@ export default function TicTacToe() {
               <span className="title-gradient">Tic Tac Toe</span>
             </h1>
             <p className="status-text">
-              {gameStatus === "playing"
-                ? `${isXNext ? "✕" : "○"} Player's Turn`
-                : gameStatus === "won"
-                  ? `${winner} Wins! 🎉`
-                  : "It's a Draw! 🤝"}
-            </p>
+  {gameStatus === "playing" && (
+    <>
+      <span className={`status-player ${isXNext ? "player-x" : "player-o"}`}>
+        {isXNext ? "✕" : "○"}
+      </span>
+      <span className="status-label">’s turn</span>
+    </>
+  )}
+
+  {gameStatus === "won" && (
+    <>
+      <span className={`status-player ${winner === "X" ? "player-x" : "player-o"}`}>
+        {winner}
+      </span>
+      <span className="status-label"> wins 🎉</span>
+    </>
+  )}
+
+  {gameStatus === "draw" && (
+    <span className="status-draw">It’s a draw 🤝</span>
+  )}
+</p>
+
           </div>
 
           <div ref={boardRef} className={`board ${gameStatus === "won" ? "board-won" : ""}`}>
@@ -126,6 +143,16 @@ export default function TicTacToe() {
           </button>
         </div>
       </div>
+
+      <div className="footer">
+  <p className="footer-text">
+    © 2026 <span className="footer-name">Anas Trabelsi</span> · Crafted with
+    <span className="footer-heart"> ♥ </span>
+    and creativity
+  </p>
+</div>
+
     </div>
+    
   )
 }
